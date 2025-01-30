@@ -177,6 +177,12 @@ def evaluate_two_sided(all_prices, range_factor, do_rebalance):
                 sa_high = sqrt(price_high_a)
                 sb_high = sqrt(price_high_b)
 
+                price_low_a = p / (range_factor ** 2)
+                price_low_b = p / range_factor
+        
+                price_high_a = p * range_factor
+                price_high_b = p * (range_factor ** 2)
+                
                 if p < price_low_a:
                     # amounts before rebalancing
                     x_low = v3_math.calculate_x(L_low, sp, sa_low, sb_low)
@@ -187,15 +193,11 @@ def evaluate_two_sided(all_prices, range_factor, do_rebalance):
                     y_low = v_old_low / 2
                     x_low = y_low / p
 
-                    price_low_a = p / range_factor
-                    price_low_b = p * range_factor
                     sa_low = sqrt(price_low_a)
                     sb_low = sqrt(price_low_b)
                     L_low = v3_math.get_liquidity(x_low, y_low, sp, sa_low, sb_low)
 
                     x_high = v3_math.calculate_x(L_high, sp, sa_high, sb_high)
-                    price_high_a = p * (range_factor ** 2)
-                    price_high_b = p * (range_factor ** 3)
                     sa_high = sqrt(price_high_a)
                     sb_high = sqrt(price_high_b)
                     L_high = v3_math.get_liquidity(x_high, 0, sp, sa_high, sb_high)
@@ -210,15 +212,11 @@ def evaluate_two_sided(all_prices, range_factor, do_rebalance):
                     y_high = v_old_high / 2
                     x_high = y_high / p
 
-                    price_high_a = p / range_factor
-                    price_high_b = p * range_factor
                     sa_high = sqrt(price_high_a)
                     sb_high = sqrt(price_high_b)
                     L_high = v3_math.get_liquidity(x_high, y_high, sp, sa_high, sb_high)
 
                     y_low = v3_math.calculate_y(L_low, sp, sa_low, sb_low)
-                    price_low_a = p / (range_factor ** 3)
-                    price_low_b = p / (range_factor ** 2)
                     sa_low = sqrt(price_low_a)
                     sb_low = sqrt(price_low_b)
                     L_low = v3_math.get_liquidity(0, y_low, sp, sa_low, sb_low)
